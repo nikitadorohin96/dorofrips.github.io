@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dorofrips — вкус природы в каждом кусочке 🌿</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('bg_kiwi.jpg') center/cover fixed;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color 1.5s ease;
+    }
+    header {
+      text-align: center;
+      background: rgba(255,255,255,0.7);
+      padding: 20px;
+    }
+    h1 { color: #2f7a38; margin: 0; }
+    main {
+      flex: 1;
+      padding: 20px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    .card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform .3s;
+    }
+    .card:hover { transform: scale(1.03); }
+    footer {
+      background: rgba(255,255,255,0.8);
+      text-align: center;
+      padding: 10px;
+    }
+    img.qr { width: 100px; margin: 10px auto; }
+    button {
+      background: #5FC56B;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      align-items: center;
+      justify-content: center;
+    }
+    #modal .window {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      animation: show .3s ease;
+      max-width: 300px;
+    }
+    @keyframes show { from {opacity:0; transform:scale(0.9)} to {opacity:1; transform:scale(1)} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dorofrips — вкус природы в каждом кусочке 🌿</h1>
+  </header>
+
+  <main id="products"></main>
+
+  <footer>
+    <img src="qr_vk.png" class="qr" alt="QR">
+  </footer>
+
+  <div id="modal">
+    <div class="window">
+      <h2>Оформление заказа 💚</h2>
+      <p>Выберите способ оплаты:</p>
+      <button onclick="closeModal()">💳 Картой</button>
+      <button onclick="closeModal()">💸 Перевод</button>
+      <button onclick="closeModal()">🚚 При получении</button>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      {name:"Фрипсы яблочные", price:150},
+      {name:"Фрипсы киви", price:250},
+      {name:"Чай 'Тёплый вечер'", price:180}
+    ];
+
+    const main = document.getElementById('products');
+    products.forEach(p=>{
+      const card = document.createElement('div');
+      card.className='card';
+      card.innerHTML=`<h3>${p.name}</h3><p>${p.price} ₽</p><button onclick="openModal()">Купить</button>`;
+      main.appendChild(card);
+    });
+
+    function openModal(){ document.getElementById('modal').style.display='flex'; }
+    function closeModal(){
+      document.getElementById('modal').style.display='none';
+      alert('Спасибо за заказ 💚 Ваши фрипсы уже готовятся!');
+    }
+  </script>
+</body>
+</html>
